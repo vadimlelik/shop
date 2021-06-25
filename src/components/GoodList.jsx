@@ -1,10 +1,10 @@
-
-
-const GoodList = ()=>{
-    return(
-        <h1>
-            GoodList
-        </h1>
-    )
-}
-export default GoodList
+import GoodsItem from './GoodsItem';
+const GoodList = (props) => {
+  const { goods = [] } = props;
+  return <div className='good-list'>
+      {goods.map((item)=>{
+          return <GoodsItem key={item.id} {...item}/>
+      })}
+  </div>;
+};
+export default GoodList;

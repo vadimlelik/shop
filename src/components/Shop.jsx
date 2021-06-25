@@ -29,7 +29,7 @@ const Shop =()=>{
     }, []);
 
     return(
-        <main className="conteinet  content">
+        <main className="container content">
             <GoodList goods={goods} />
         </main>
     )
