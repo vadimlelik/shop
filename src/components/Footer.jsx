@@ -1,10 +1,9 @@
-  
-import React from 'react';
 const Footer = ()=>{
     const data =  new Date()
     const dataYear = data.getFullYear() 
+
     return(
-        <footer className="page-footer">
+        <footer className="page-footer  teal darken-1">
         <div className="footer-copyright">
           <div className="container">
           © {dataYear} Copyright Text
