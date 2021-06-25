@@ -1,5 +1,5 @@
 const GoodsItem = (props) => {
-  const { description, name, id, price, full_background } = props;
+  const { description, name, id, price, full_background ,addToBascet } = props;
   return (
     <div className="card">
       <div className="card-image">
@@ -10,7 +10,11 @@ const GoodsItem = (props) => {
         <p>{description}</p>
       </div>
       <div className="card-action">
-        <button className="btn">Купить</button>
+        <button className="btn" onClick={()=> addToBascet({
+          id,
+          name,
+          price
+        })}>Купить</button>
         <span className="right" style={{ fontSize: '1.8rem' }}>
           {price} руб.
         </span>
