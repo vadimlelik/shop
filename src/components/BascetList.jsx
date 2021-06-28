@@ -5,6 +5,8 @@ export default function BascetList(props) {
   const { order = [] , 
     handleBasketShow= Function.prototype,
     removeFromBasket= Function.prototype,
+    incQuantity,
+    decQuantity,
   } = props;
   const totalPrice = order.reduce((sum,el )=>{
     return(sum + el.price * el.quantity)
@@ -14,7 +16,11 @@ export default function BascetList(props) {
       <li className="collection-item active ">Корзина</li>
       {order.length ? (
         order.map((item) => {
-          return <BascetItem key={item.id} {...item} removeFromBasket={removeFromBasket}/>;
+          return <BascetItem key={item.id} {...item} 
+          removeFromBasket={removeFromBasket}
+          decQuantity={decQuantity}
+          incQuantity={incQuantity}
+          />;
         })
       ) : (
         <li className="collection-item ">Корзина пуста</li>

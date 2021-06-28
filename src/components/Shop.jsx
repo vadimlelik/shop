@@ -12,6 +12,35 @@ const Shop = () => {
   const [order, setOrder] = useState([]);
   const [isBascetShow, setBascetShow] = useState(false);
 
+  const incQuantity = (itemId) => {
+    const newOrder = order.map((el) => {
+      if (el.id === itemId) {
+        const newQuantity = el.quantity + 1;
+        return {
+          ...el,
+          quantity: newQuantity,
+        };
+      } else {
+        return el;
+      }
+    });
+    setOrder(newOrder);
+  };
+  const decQuantity = (itemId) => {
+    const newOrder = order.map((el) => {
+      if (el.id === itemId) {
+        const newQuantity = el.quantity - 1;
+        return {
+          ...el,
+          quantity: newQuantity >= 0 ? newQuantity : 0,
+        };
+      } else {
+        return el;
+      }
+    });
+    setOrder(newOrder);
+  };
+
   const addToBasket = (item) => {
     const itemIndex = order.findIndex((orderItem) => orderItem.id === item.id);
 
@@ -58,14 +87,16 @@ const Shop = () => {
   const handleBasketShow = () => {
     setBascetShow(!isBascetShow);
   };
-  const removeFromBasket = (itemId)=>{
-    const newOrder  =  order.filter(el=> el.id !== itemId) 
-    setOrder(newOrder)
-  }
+  const removeFromBasket = (itemId) => {
+    const newOrder = order.filter((el) => el.id !== itemId);
+    setOrder(newOrder);
+  };
 
   return (
     <main className="container content">
-      <Cart quantity={order.length} handleBasketShow={handleBasketShow} />
+      <Cart quantity={order.length} 
+      
+      handleBasketShow={handleBasketShow} />
 
       {loading ? (
         <Preloader />
@@ -73,10 +104,13 @@ const Shop = () => {
         <GoodsList goods={goods} addToBasket={addToBasket} />
       )}
       {isBascetShow && (
-        <BascetList 
-        removeFromBasket={removeFromBasket}
-        handleBasketShow={handleBasketShow} 
-        order={order} />
+        <BascetList
+          removeFromBasket={removeFromBasket}
+          handleBasketShow={handleBasketShow}
+          incQuantit={incQuantity}
+          decQuantity={decQuantity}
+          order={order}
+        />
       )}
     </main>
   );
