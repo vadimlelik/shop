@@ -2,7 +2,10 @@ import React from 'react';
 import BascetItem from './BascetItem';
 
 export default function BascetList(props) {
-  const { order = [] , handleBasketShow} = props;
+  const { order = [] , 
+    handleBasketShow= Function.prototype,
+    removeFromBasket= Function.prototype,
+  } = props;
   const totalPrice = order.reduce((sum,el )=>{
     return(sum + el.price * el.quantity)
   },0)
@@ -11,13 +14,14 @@ export default function BascetList(props) {
       <li className="collection-item active ">Корзина</li>
       {order.length ? (
         order.map((item) => {
-          return <BascetItem key={item.id} {...item} />;
+          return <BascetItem key={item.id} {...item} removeFromBasket={removeFromBasket}/>;
         })
       ) : (
         <li className="collection-item ">Корзина пуста</li>
       )}
       <li className="collection-item active">Общая стоимость:{totalPrice} руб </li>
-      <i className='material-icons basket-close ' onClick={handleBasketShow}>close</i>
+      <i className='material-icons basket-close ' 
+      onClick={handleBasketShow}>close</i>
     </ul>
   );
 }
