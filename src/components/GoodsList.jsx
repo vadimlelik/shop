@@ -1,4 +1,3 @@
-
 import { GoodsItem } from './GoodsItem';
 
 function GoodsList(props) {
